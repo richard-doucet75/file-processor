@@ -1,0 +1,49 @@
+<UserControl x:Class="FileProcessorWpf.Views.UserControls.DataSetGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:FileProcessorWpf.ViewModel"
+             d:DataContext="{StaticResource ViewModel}"             >
+    <UserControl.Resources>
+        <local:ProcessorViewModel x:Key="ViewModel" />
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="Data Sets" />
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Add Row"
+                    Width="80"
+                    Command="{Binding AddDataSetRowCommand}" />
+            <Button Content="Add Column"
+                    Width="80"
+                    Command="{Binding AddDataSetColumnCommand}"/>
+        </StackPanel>
+            <ItemsControl ItemsSource="{Binding DataSets}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <ItemsControl ItemsSource="{Binding }">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBox Width="40"
+                                                 Text="{Binding Path=.Value}"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>
+
